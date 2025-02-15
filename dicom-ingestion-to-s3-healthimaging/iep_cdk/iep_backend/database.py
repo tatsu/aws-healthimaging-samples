@@ -20,19 +20,22 @@ class AuroraServerlessDB(Construct):
         super().__init__(scope, id, **kwargs)
 
         self._subnetGroup = rds.SubnetGroup(self, "IEP-Aurora-Subnet-Group", vpc=vpc, vpc_subnets=ec2.SubnetSelection(subnet_type=ec2.SubnetType.PRIVATE_WITH_EGRESS), description="IEP Aurora DB Subnet Group")
-        self._scalingOptions = rds.ServerlessScalingOptions(auto_pause=Duration.minutes(pause_timeout), min_capacity=rds.AuroraCapacityUnit.ACU_1 , max_capacity=rds.AuroraCapacityUnit.ACU_64)
         self._db_adminpassword = rds.Credentials.from_generated_secret(username="admin")
         
-        self._dbCluster = rds.ServerlessCluster(
-            self, 
-            "IEP-DBCluster", 
-            engine=rds.DatabaseClusterEngine.AURORA_MYSQL,
+        self._dbCluster = rds.DatabaseCluster(
+            self,
+            "IEP-DBCluster",
+            engine=rds.DatabaseClusterEngine.aurora_mysql(
+                version=rds.AuroraMysqlEngineVersion.VER_3_07_1
+            ),
+            serverless_v2_min_capacity=1,
+            serverless_v2_max_capacity=64,
+            writer=rds.ClusterInstance.serverless_v2("writer"),
             vpc=vpc,
             default_database_name=db_name,
             security_groups=[aurora_security_group,],
             credentials=self._db_adminpassword,
             subnet_group=self._subnetGroup,
-            scaling=self._scalingOptions,
             enable_data_api=True
         )
 

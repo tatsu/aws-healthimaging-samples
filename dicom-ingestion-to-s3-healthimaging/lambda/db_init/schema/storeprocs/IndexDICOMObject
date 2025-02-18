@@ -1,4 +1,7 @@
 DROP PROCEDURE IF EXISTS IndexDICOMObject;
+
+DELIMITER //
+
 CREATE PROCEDURE IndexDICOMObject
 (
 	/*Instance */
@@ -174,4 +177,6 @@ BEGIN
 			UPDATE Series set imagecount = imagecount+1 where seriesid = retseriesid;
 			UPDATE Study set totalimagecount = totalimagecount+1 where studyid = retstudyid;
 		end if;
-END;
+END//
+
+DELIMITER ;

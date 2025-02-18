@@ -71,10 +71,11 @@ def IterateandCreate(cnx, folderpath):
       cursor = cnx.cursor()
       try:
         print("Creating {}: ".format(filename), end='')
-        results = cursor.execute(content, multi=True)
+        cursor.execute(content, map_results=True)
         try:
-            for result in results:
-                pass
+          for _, result_set in cursor.fetchsets():
+            for result in result_set:
+              pass
         except Exception as e:
             pass
         cnx.commit()

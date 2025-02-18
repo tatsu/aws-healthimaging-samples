@@ -1,5 +1,8 @@
 /*****  InsertupdateSeries StoreProc ****/
 DROP PROCEDURE IF EXISTS InsertUpdateSeries;
+
+DELIMITER //
+
 CREATE PROCEDURE InsertUpdateSeries
 (
 	/*series*/
@@ -87,4 +90,6 @@ BEGIN
 			Series.d00185100 = d00185100
 		WHERE Series.seriesid = outseriesid;
 	END IF;	
-END;
+END//
+
+DELIMITER ;

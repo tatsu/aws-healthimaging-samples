@@ -1,4 +1,7 @@
 DROP PROCEDURE IF EXISTS InsertInstanceLocation;
+
+DELIMITER //
+
 CREATE PROCEDURE InsertInstanceLocation
 (
 	IN instanceid bigint,
@@ -25,4 +28,6 @@ BEGIN
         `bucketname` = bucketname ,
         `region` = region ,
         `filekey` = filekey;
-END;
+END//
+
+DELIMITER ;

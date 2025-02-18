@@ -1,5 +1,8 @@
 /*****  InsertupdateSeries StoreProc ****/
 DROP PROCEDURE IF EXISTS InsertUpdateStudy; 
+
+DELIMITER //
+
 CREATE PROCEDURE InsertUpdateStudy
 (
 	/*study*/
@@ -79,4 +82,6 @@ BEGIN
         `d00321033` = d00321033 
         WHERE Study.studyid = outstudyid;
     END IF; 
-END;
+END//
+
+DELIMITER ;

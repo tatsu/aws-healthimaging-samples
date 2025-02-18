@@ -1,5 +1,7 @@
 DROP PROCEDURE IF EXISTS DeleteStudy;
 
+DELIMITER //
+
 CREATE PROCEDURE DeleteStudy 
 (
 	/*Instance */
@@ -10,4 +12,6 @@ BEGIN
     delete from Instance where seriesid in ( select seriesid from Series where Series.studyid = studyid);
     delete from Series where Series.studyid = studyid;
     delete from Study where Study.studyid = studyid;
-END
+END//
+
+DELIMITER ;

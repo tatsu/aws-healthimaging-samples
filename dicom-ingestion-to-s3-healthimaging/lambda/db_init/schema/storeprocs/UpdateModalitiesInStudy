@@ -1,5 +1,8 @@
 /*****  UpdateModalitiesInStudy StoreProc ****/
 DROP PROCEDURE IF EXISTS UpdateModalitiesInStudy;
+
+DELIMITER //
+
 CREATE PROCEDURE UpdateModalitiesInStudy
 (
 
@@ -20,4 +23,6 @@ BEGIN
             UPDATE Study SET Study.d00080061 = (SELECT CONCAT(studymodality , "/" , d00080060 )) where Study.studyid = instudyid;
         END IF;
     END IF;
-END
+END//
+
+DELIMITER ;

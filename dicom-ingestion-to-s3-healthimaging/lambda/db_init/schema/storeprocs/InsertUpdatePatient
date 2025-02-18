@@ -1,5 +1,8 @@
 /*****  InsertupdateSeries StoreProc ****/
 DROP PROCEDURE IF EXISTS InsertUpdatePatient;
+
+DELIMITER //
+
 CREATE PROCEDURE InsertUpdatePatient
 (
 	/*patient*/
@@ -44,4 +47,6 @@ BEGIN
             Patient.d00100040 = d00100040 
         WHERE Patient.patientid = outpatientid;
     END IF;
-END;
+END//
+
+DELIMITER ;

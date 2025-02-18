@@ -1,4 +1,7 @@
 DROP PROCEDURE IF EXISTS InsertUpdateInstance;
+
+DELIMITER //
+
 CREATE PROCEDURE InsertUpdateInstance
 (
 	/*Instance */
@@ -136,4 +139,6 @@ BEGIN
 		Instance.`d00281053` = d00281053 
 		WHERE Instance.instanceid = outinstanceid;
 	END IF;
-END;
+END//
+
+DELIMITER ;
